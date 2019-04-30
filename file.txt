@@ -1,0 +1,100 @@
+background
+font size
+font style
+
+<style include="shared-styles">
+            :host {
+                display: block;
+                width: 100%;
+                height: 100%;
+                --material-font-family: "Comic Sans MS", Arial, Calibri;
+            }
+            div {
+                background-image: url("pic.jpeg");  // same folder as design
+            }
+        </style>
+
+
+https://cdn.vaadin.com/vaadin-material-styles/1.2.0/demo/typography.html
+
+material + all caps:
+            
+vaadin-button {
+    text-transform: none;
+}
+
+or
+
+<dom-module id="my-text-field-styles" theme-for="vaadin-text-field">
+  <template>
+    <style>
+      :host(vaadin-text-field):not([has-value]):not([focused]):not([invalid]) [part="label"] {
+        transform: scale(0.75);
+      }
+    </style>
+  </template>
+</dom-module>
+
+
+
+text-field with no animation:
+
+theme="always-float-label"
+ <settings xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+
+		<server>
+            <id>v7-extended-repository</id>
+            <username>bender</username>
+            <password>tSgGFIOoCFqxfWSz</password>
+        </server>
+				
+        <!-- add credentials for vaadin-addons -->
+        <server>
+            <id>vaadin-addons</id>
+            <username>deployment</username>
+            <password>d3pl0ymentovnew9</password>
+        </server>
+    </servers>
+    <profiles>
+        <profile>
+            <id>standard</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <executable>gpg</executable>
+                <gpg.useagent>false</gpg.useagent>
+                <gpg.passphrase.file>/opt/build-data/gpg/passphrase</gpg.passphrase.file>
+                <vaadin.prerelease>false</vaadin.prerelease>
+            </properties>
+        </profile>
+
+		<profile>
+            <!-- use in parallel with release profile -->
+            <id>extended-support</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+
+            <properties>
+                <executable>gpg</executable>
+                <gpg.useagent>false</gpg.useagent>
+                <gpg.passphrase.file>/opt/build-data/gpg/passphrase</gpg.passphrase.file>
+                <gpg.keyname>BF0451C0</gpg.keyname>
+                <vaadin.prerelease>false</vaadin.prerelease>
+            </properties>
+
+            <repositories>
+                <repository>
+                    <id>v7-extended-repository</id>
+                    <url>https://repo.vaadin.com/nexus/content/repositories/vaadin7-extended/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+    </profiles>
+</settings>
